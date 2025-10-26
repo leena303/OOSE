@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Product</title>
+</head>
+<body>
+<h2>Thêm sản phẩm</h2>
+
+<form method="post" action="/products/save" th:object="${product}">
+
+    <label>Product Name:</label>
+    <input type="text" th:field="*{name}" required/><br/>
+
+    <label>Price:</label>
+    <input type="number" step="0.01" th:field="*{price}" required/><br/>
+
+    <label>Weight:</label>
+    <input type="number" step="0.01" th:field="*{weight}" required/><br/>
+
+    <label>Category:</label>
+    <select th:field="*{product_category_id}">
+        <option th:each="c : ${categories}"
+                th:value="${c.product_category_id}"
+                th:text="${c.category_name}">
+        </option>
+    </select><br/><br/>
+
+    <button type="submit">Save</button>
+</form>
+
+<p><a href="/products">Back</a></p>
+</body>
+</html>

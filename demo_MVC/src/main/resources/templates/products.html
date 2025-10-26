@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{product.title}">Products</title>
+</head>
+
+<body>
+
+<h2 th:text="#{product.title}">Danh sách sản phẩm</h2>
+
+<!-- Chọn ngôn ngữ -->
+<p>
+    <a th:href="@{/products(lang='vi')}">VI</a> |
+    <a th:href="@{/products(lang='en')}">EN</a>
+</p>
+
+<!-- Form tìm kiếm -->
+<form th:action="@{/products}" method="get">
+    <input type="text"
+           name="keyword"
+           th:value="${keyword}"
+           th:placeholder="#{product.search}"
+           placeholder="Tìm kiếm sản phẩm..."/>
+    <button type="submit" th:text="#{product.search}">Tìm</button>
+</form>
+
+<br/>
+
+<p>
+    <a th:href="@{/products/new}">+ <span th:text="#{product.add}">Thêm sản phẩm</span></a> |
+    <a th:href="@{/}">Home</a>
+</p>
+
+<table border="1" cellpadding="6">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th th:text="#{product.price}">Price</th>
+        <th th:text="#{product.weight}">Weight</th>
+        <th>CategoryID</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.productId}">1</td>
+        <td th:text="${p.price}">0</td>
+        <td th:text="${p.weight}">0</td>
+        <td th:text="${p.category.productCategoryId}">1</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
